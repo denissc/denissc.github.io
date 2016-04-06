@@ -4,12 +4,24 @@
     <title>Kottans:Pokedex</title>
     <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
     <style type="text/css">
-        img.center{  
-            display: block;
+        .poke-image-wrapper{  
+            height: 120px;
             margin: 5px auto;
         }
-        .card{
+        .poke-image-helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .poke-card{
+            color: black;
             min-height: 200px;
+            border: 1px solid black;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .poke-details-link{
+            text-decoration: none;
         }
         .types span {
             padding: 5px;
@@ -26,13 +38,19 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="col-md-4 card" ng-repeat = "pokemon in pokeDex.pokemons">
-                            <img class="center" src="http://pokeapi.co/media/img/{{pokemon.pkdx_id}}.png">
-                            <p class="text-center">{{pokemon.name}}</p>
-                            <a href = "#{{pokemon.pkdx_id}}">view</a>
-                            <div class="types">
-                                <span class="{{type.name}}" ng-repeat = "type in pokemon.types">{{type.name}}</span>
-                            </div>
+                        <div class="col-md-4" ng-repeat = "pokemon in pokeDex.pokemons">
+                            <a class="poke-details-link" href=#{{pokemon.pkdx_id}}">
+                                <div class="poke-card">
+                                    <div class="poke-image-wrapper text-center">
+                                        <span class="poke-image-helper"></span>
+                                        <img ng-src="http://pokeapi.co/media/img/{{pokemon.pkdx_id}}.png">
+                                    </div>
+                                    <h4 class="poke-name text-center"><b>{{pokemon.name}}</b></h4>
+                                    <div class="types">
+                                        <span class="{{type.name}}" ng-repeat = "type in pokemon.types">{{type.name}}</span>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                         <button class="btn btn-block btn-primary" ng-click="pokeDex.getNextChunk()">Load More</button>
                     </div>
