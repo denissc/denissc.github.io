@@ -2,44 +2,32 @@
 <html>
 <head>
     <title>Kottans:Pokedex</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-    <style type="text/css">
-        .poke-image-wrapper{  
-            height: 120px;
-            margin: 5px auto;
-        }
-        .poke-image-helper {
-            display: inline-block;
-            height: 100%;
-            vertical-align: middle;
-        }
-        .poke-card{
-            color: black;
-            min-height: 200px;
-            border: 1px solid black;
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
-        .poke-details-link{
-            text-decoration: none;
-        }
-        .types span {
-            padding: 5px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+    <script src = "js/mainApp.js"></script>
+    <script src = "js/route.js"></script>
+    <script src = "js/filters.js"></script>
+    <script src = "js/controllers.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div ng-app = "pokeList"  ng-controller = "pokeController">
+        <div ng-app = "pokeList"  ng-controller = "pokeController as pokes">
             <h1 class="text-center">Pokedex</h1>
             <div class="row">
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="col-md-4" ng-repeat = "pokemon in pokeDex.pokemons">
-                            <a class="poke-details-link" href=#{{pokemon.pkdx_id}}">
+                        <select ng-model="selectedType">
+                            <option value="" selected disabled>Filter By Type</option>
+                            <option value="">All</option>
+                            <option value="{{pokeType.name.toLowerCase()}}" ng-repeat="pokeType in pokes.types">{{pokeType.name}}</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4" ng-repeat="pokemon in pokeDex.pokemons | typeIs:selectedType">
+                            <a class="poke-details-link" href="#{{pokemon.pkdx_id}}">
                                 <div class="poke-card">
                                     <div class="poke-image-wrapper text-center">
                                         <span class="poke-image-helper"></span>
@@ -47,84 +35,69 @@
                                     </div>
                                     <h4 class="poke-name text-center"><b>{{pokemon.name}}</b></h4>
                                     <div class="types">
-                                        <span class="{{type.name}}" ng-repeat = "type in pokemon.types">{{type.name}}</span>
+                                        <span class="{{type.name}}" ng-repeat = "type in pokemon.types ">{{type.name}}</span>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <button class="btn btn-block btn-primary" ng-click="pokeDex.getNextChunk()">Load More</button>
+                        <div class="spinner" ng-show="loading">Loading...</div>
+                        <button class="btn btn-block btn-primary" ng-click="pokeDex.getNextChunk()" ng-disabled="loading">Load More</button>
                     </div>
                 </div>
                 <div class="col-md-3" ng-view></div>
                 <script type = "text/ng-template" id = "pokeDetails.html">
-                    <h2> Detailed view </h2>
-                    <img class="center" src="http://pokeapi.co/media/img/{{poke.details.pkdx_id}}.png">
-                    <p>#{{poke.details.pkdx_id}}</p>
-                    <div class="types">
-                        <span class="{{type.name}}" ng-repeat = "type in poked.details.types">{{type.name}}</span>
+                    <div class="poke-details-wrapper">
+                        <div class="spinner" ng-show="poke.loading">Loading...</div>
+                        <div class="poke-details" ng-hide="poke.loading">
+                            <img class="center" src="http://pokeapi.co/media/img/{{poke.details.pkdx_id}}.png">
+                            <p>{{poke.details.name}} #{{poke.details.pkdx_id | numberFixedLen:3}}</p>
+                            <table>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>
+                                        <div class="types">
+                                            <span class="{{type.name}}" ng-repeat = "type in poke.details.types">{{type.name}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Attak</td>
+                                    <td>{{poke.details.attack}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Defense</td>
+                                    <td>{{poke.details.defense}}</td>
+                                </tr>
+                                <tr>
+                                    <td>HP</td>
+                                    <td>{{poke.details.hp}}</td>
+                                </tr>
+                                <tr>
+                                    <td>SP Attack</td>
+                                    <td>{{poke.details.sp_atk}}</td>
+                                </tr>
+                                <tr>
+                                    <td>SP Defense</td>
+                                    <td>{{poke.details.sp_def}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Speed</td>
+                                    <td>{{poke.details.speed}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Weight</td>
+                                    <td>{{poke.details.weight}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total moves</td>
+                                    <td>{{poke.details.moves.length}}</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                  </script>
             </div>
         </div>
     </div>
-
-    <script>
-        var mainApp = angular.module("pokeList", ['ngRoute']);
-        mainApp.config(['$routeProvider', function($routeProvider) {
-            $routeProvider.
-            
-            when('/:pokemonId', {
-               templateUrl: 'pokeDetails.html',
-               controller: 'ViewPokemonController',
-                controllerAs: "poke"
-            }).
-            
-            otherwise({
-               redirectTo: '/'
-            });
-        }]);
-         
-        mainApp.controller('pokeController', function($scope, $http) {
-            $scope.pokeDex = {
-                pokemons : [],
-                pokeApiDomain: "http://pokeapi.co/",
-                chunkUrl:"api/v1/pokemon/?limit=12",
-                getNextChunk : function () {
-                    var nextChunkUrl = this.pokeApiDomain+this.chunkUrl;
-                    $http.get(nextChunkUrl)
-                    .then(function(response) {
-                        //First function handles success
-                        $scope.pokeDex.pokemons = $scope.pokeDex.pokemons.concat(response.data.objects);
-                        $scope.pokeDex.chunkUrl = response.data.meta.next;
-                        console.log(response.data);
-                    }, function(response) {
-                        //Second function handles error
-                        $scope.content = "Something went wrong";
-                        console.log(response.data);
-                    });
-                    console.log(this.chunkUrl);
-                }
-            };
-
-            $scope.pokeDex.getNextChunk();
-
-        });
-
-        mainApp.controller('ViewPokemonController', function($routeParams,$http) {
-            var detailsDataUrl = "http://pokeapi.co/api/v1/pokemon/"+$routeParams.pokemonId;
-            var self = this;
-            $http.get(detailsDataUrl)
-            .then(function(response) {
-                self.details = response.data;
-                console.log(response);
-            }, function(response) {
-                //Second function handles error
-                $scope.content = "Something went wrong";
-                console.log(response.data);
-            });
-            //self.message = $routeParams.pokemonId;
-        });
-    </script>
-  
 </body>
 </html>

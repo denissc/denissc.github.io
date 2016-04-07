@@ -1,0 +1,25 @@
+.poke-image-wrapper{  
+    height: 120px;
+    margin: 5px auto;
+}
+.poke-image-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.poke-card{
+    color: black;
+    min-height: 200px;
+    border: 1px solid black;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+a.poke-details-link{
+    text-decoration: none;
+}
+.poke-details-wrapper{
+    position: fixed;
+}
+.types span {
+    padding: 5px;
+}
