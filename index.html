@@ -14,7 +14,7 @@
 
 <body>
     <div class="container">
-        <div ng-app = "pokeList"  ng-controller = "pokeController as pokes">
+        <div ng-app = "pokeList"  ng-controller = "pokeController">
             <h1 class="text-center">Pokedex</h1>
             <div class="row">
                 <div class="col-md-9">
@@ -22,7 +22,7 @@
                         <select ng-model="selectedType">
                             <option value="" selected disabled>Filter By Type</option>
                             <option value="">All</option>
-                            <option value="{{pokeType.name.toLowerCase()}}" ng-repeat="pokeType in pokes.types">{{pokeType.name}}</option>
+                            <option value="{{pokeType.name.toLowerCase()}}" ng-repeat="pokeType in pokeDex.types">{{pokeType.name}}</option>
                         </select>
                     </div>
                     <div class="row">

@@ -1,15 +1,4 @@
 mainApp.controller('pokeController', function($scope, $http) {
-    var self = this;
-    
-    $http.get("http://pokeapi.co/api/v1/type/?limit=999")
-    .then(function(response) {
-        self.types = response.data.objects;
-        console.log(response.data);
-    }, function(response) {
-        //Second function handles error
-        $scope.content = "Something went wrong";
-        console.log(response.data);
-    });
     $scope.pokeDex = {
         pokemons : [],
         pokeApiDomain: "http://pokeapi.co/",
@@ -23,15 +12,17 @@ mainApp.controller('pokeController', function($scope, $http) {
                 $scope.pokeDex.pokemons = $scope.pokeDex.pokemons.concat(response.data.objects);
                 $scope.pokeDex.chunkUrl = response.data.meta.next;
                 $scope.loading = false;
-                console.log(response.data);
             }, function(response) {
                 //Second function handles error
-                $scope.content = "Something went wrong";
-                console.log(response.data);
+                alert("Something went wrong");
             });
-            console.log(this.chunkUrl);
         }
     };
+    
+    $http.get("http://pokeapi.co/api/v1/type/?limit=999")
+    .then(function(response) {
+        $scope.pokeDex.types = response.data.objects;
+    });
 
     $scope.pokeDex.getNextChunk();
 
