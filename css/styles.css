@@ -17,6 +17,17 @@
 .types{
     margin: 5px;
 }
+.form-control{
+    border: 1px solid #000;
+    border-radius: 0;
+}
+.container{
+    min-width: 350px;
+}
+.btn{
+    margin-bottom: 30px;
+    margin-top: 15px;
+}
 .spinner{
     background: url(../images/giphy.gif) no-repeat;
     background-position: 50%;
@@ -39,7 +50,7 @@ a.poke-details-link{
 .poke-details-wrapper{
     position: fixed;
     top: 334px;
-    width: 250px;
+    width: 320px;
 }
 .poke-details{
     border: 1px solid;
@@ -62,25 +73,33 @@ a.poke-details-link{
     padding: 5px;
     margin: 5px;
     border-radius: 3px;
-    color: #fff;
+    color: #000;
 }
-.normal{background-color: gray;}
-.fighting{background-color: gray;}
-.flying{background-color: gray;}
-.poison{background-color: gray;}
-.ground{background-color: gray;}
-.rock{background-color: gray;}
-.bug{background-color: gray;}
-.ghost{background-color: gray;}
-.steel{background-color: gray;}
-.fire{background-color: gray;}
-.water{background-color: gray;}
-.grass{background-color: gray;}
-.electric{background-color: gray;}
-.ice{background-color: gray;}
-.dragon{background-color: gray;}
-.dark{background-color: gray;}
-.fairy{background-color: gray;}
-.unknown{background-color: gray;}
-.shadow{background-color: gray;}
-.psychic{background-color: gray;}
+
+.normal{background-color: #FF9800;}
+.fighting{background-color: #9E9E9E;}
+.flying{background-color: #009688;}
+.poison{background-color: #9C27B0;}
+.ground{background-color: #795548;}
+.rock{background-color: #76736E;}
+.bug{background-color: #8BC34A;}
+.ghost{background-color: #745C7E;}
+.steel{background-color: #AAC7CF;}
+.fire{background-color: #F44336;}
+.water{background-color: #96B9E7;}
+.grass{background-color: #4CB338;}
+.electric{background-color: #03A9F4;}
+.ice{background-color: #C1C3D0;}
+.dragon{background-color: #4F4E4D;}
+.dark{background-color: #48595E;}
+.fairy{background-color: #E4B1BA;}
+.unknown{background-color: #D26060;}
+.shadow{background-color: #CDB657;}
+.psychic{background-color: #FFE445;}
+@media screen and (max-width: 995px) {
+    .poke-details-wrapper{
+        position: relative;
+        top: 0px;
+        width: 100%;
+    }
+}

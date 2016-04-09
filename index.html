@@ -8,66 +8,66 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <script type = "text/ng-template" id = "pokeDetails.html">
-            <div class="poke-details-wrapper">
+            <div class="poke-details-wrapper text-center">
                 <div class="spinner" ng-show="pokemonDetails.loading"></div>
                 <div class="poke-details col-md-12" ng-hide="pokemonDetails.loading">
                     <div class="poke-image-wrapper big text-center">
                         <span class="poke-image-helper"></span>
                         <img class="center" src="http://pokeapi.co/media/img/{{pokemonDetails.pkdx_id}}.png">
                     </div>
-                    <h3 class="text-center"><b>{{pokemonDetails.name}} #{{pokemonDetails.pkdx_id | numberFixedLen:3}}</b></h3>
+                    <h3 class="text-center"><b>{{pokemonDetails.name}} #{{pokemonDetails.pkdx_id | threeDiditFormat}}</b></h3>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="detail-name col-md-8 text-center">Type</div>
-                            <div class="detail-value col-md-4 text-center">{{pokemonDetails.types[0].name}}</div>
+                            <div class="detail-name col-md-8 col-sm-8 col-xs-8 text-center">Type</div>
+                            <div class="detail-value col-md-4 col-sm-4 col-xs-4 text-center">{{pokemonDetails.types[0].name}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="detail-name col-md-8 text-center">Attak</div>
-                            <div class="detail-value col-md-4 text-center">{{pokemonDetails.attack}}</div>
+                            <div class="detail-name col-md-8 col-sm-8 col-xs-8 text-center">Attak</div>
+                            <div class="detail-value col-md-4 col-sm-4 col-xs-4 text-center">{{pokemonDetails.attack}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="detail-name col-md-8 text-center">Defense</div>
-                            <div class="detail-value col-md-4 text-center">{{pokemonDetails.defense}}</div>
+                            <div class="detail-name col-md-8 col-sm-8 col-xs-8 text-center">Defense</div>
+                            <div class="detail-value col-md-4 col-sm-4 col-xs-4 text-center">{{pokemonDetails.defense}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="detail-name col-md-8 text-center">HP</div>
-                            <div class="detail-value col-md-4 text-center">{{pokemonDetails.hp}}</div>
+                            <div class="detail-name col-md-8 col-sm-8 col-xs-8 text-center">HP</div>
+                            <div class="detail-value col-md-4 col-sm-4 col-xs-4 text-center">{{pokemonDetails.hp}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="detail-name col-md-8 text-center">SP Attack</div>
-                            <div class="detail-value col-md-4 text-center">{{pokemonDetails.sp_atk}}</div>
+                            <div class="detail-name col-md-8 col-sm-8 col-xs-8 text-center">SP Attack</div>
+                            <div class="detail-value col-md-4 col-sm-4 col-xs-4 text-center">{{pokemonDetails.sp_atk}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="detail-name col-md-8 text-center">SP Defense</div>
-                            <div class="detail-value col-md-4 text-center">{{pokemonDetails.sp_def}}</div>
+                            <div class="detail-name col-md-8 col-sm-8 col-xs-8 text-center">SP Defense</div>
+                            <div class="detail-value col-md-4 col-sm-4 col-xs-4 text-center">{{pokemonDetails.sp_def}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="detail-name col-md-8 text-center">Speed</div>
-                            <div class="detail-value col-md-4 text-center">{{pokemonDetails.speed}}</div>
+                            <div class="detail-name col-md-8 col-sm-8 col-xs-8 text-center">Speed</div>
+                            <div class="detail-value col-md-4 col-sm-4 col-xs-4 text-center">{{pokemonDetails.speed}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="detail-name col-md-8 text-center">Weight</div>
-                            <div class="detail-value col-md-4 text-center">{{pokemonDetails.weight}}</div>
+                            <div class="detail-name col-md-8 col-sm-8 col-xs-8 text-center">Weight</div>
+                            <div class="detail-value col-md-4 col-sm-4 col-xs-4 text-center">{{pokemonDetails.weight}}</div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="detail-name last col-md-8 text-center">Total moves</div>
-                            <div class="detail-value last col-md-4 text-center">{{pokemonDetails.moves.length}}</div>
+                            <div class="detail-name last col-md-8 col-sm-8 col-xs-8 text-center">Total moves</div>
+                            <div class="detail-value last col-md-4 col-sm-4 col-xs-4 text-center">{{pokemonDetails.moves.length}}</div>
                         </div>
                     </div>
                 </div>
@@ -81,8 +81,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-md-12">
-                            <select ng-model="selectedType">
+                        <div class="col-md-4">
+                            <select class="form-control" ng-model="selectedType">
                                 <option value="" selected disabled>Filter By Type</option>
                                 <option value="">All</option>
                                 <option value="{{pokeType.name.toLowerCase()}}" ng-repeat="pokeType in pokemonTypes">{{pokeType.name}}</option>
@@ -90,7 +90,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4" ng-repeat="pokemon in pokemons | typeIs:selectedType">
+                        <div class="col-md-4 col-sm-4 col-xs-6" ng-repeat="pokemon in pokemons | typeIs:selectedType">
                             <div class="poke-card" ng-click="showPokemonDetails(pokemon.pkdx_id)">
                                 <div class="poke-image-wrapper text-center">
                                     <span class="poke-image-helper"></span>
@@ -102,8 +102,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="spinner" ng-show="pokemons.loading"></div>
-                        <button class="btn btn-block btn-primary" ng-click="load()" ng-disabled="pokemons.loading">Load More</button>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="spinner" ng-show="pokemons.loading"></div>
+                            <button class="btn btn-lg btn-block btn-primary" ng-click="load()" ng-disabled="pokemons.loading">Load More</button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4" ng-include="pokeDetails"></div>

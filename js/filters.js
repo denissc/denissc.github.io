@@ -1,15 +1,12 @@
-app.filter('numberFixedLen', function () {
-    return function (n, len) {
-        var num = parseInt(n, 10);
-        len = parseInt(len, 10);
-        if (isNaN(num) || isNaN(len)) {
+app.filter('threeDiditFormat', function () {
+    return function (n) {
+        if (n > 0 && n < 10) {
+            return '00' + n;
+        } else if (n > 10 && n < 100) {
+            return '0' + n;
+        } else {
             return n;
         }
-        num = ''+num;
-        while (num.length < len) {
-            num = '0'+num;
-        }
-        return num;
     };
 });
 
