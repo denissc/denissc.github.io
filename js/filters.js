@@ -1,4 +1,4 @@
-mainApp.filter('numberFixedLen', function () {
+app.filter('numberFixedLen', function () {
     return function (n, len) {
         var num = parseInt(n, 10);
         len = parseInt(len, 10);
@@ -13,7 +13,7 @@ mainApp.filter('numberFixedLen', function () {
     };
 });
 
-mainApp.filter('typeIs', function () {
+app.filter('typeIs', function () {
     return function (pokemons, selectedType) {
         if (selectedType === undefined || selectedType === '') {
             return pokemons;
